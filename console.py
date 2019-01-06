@@ -42,7 +42,18 @@ class HBNBCommand(cmd.Cmd):
             if not line:
                 raise SyntaxError()
             my_list = line.split(" ")
+
             obj = eval("{}()".format(my_list[0]))
+            # update
+            for kv_pair in my_list[1:]:
+                k, v = kv_pair.split('=')
+                if is_int(v):
+                    obj.__dict__[k] = int(v)
+                elif is_float(v):
+                    obj.__dict__[k] = float(v)
+                else:
+                    v = v.replace('_', ' ')
+                    obj.__dict__[k] = v.strip('"')
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
@@ -247,6 +258,25 @@ class HBNBCommand(cmd.Cmd):
                     self.do_update(args)
         else:
             cmd.Cmd.default(self, line)
+
+
+def is_int(n):
+    """Checks if argument is an integer"""
+    try:
+        int(n)
+        return True
+    except ValueError:
+        return False
+
+
+def is_float(n):
+    """Checks if argument is a float. NOTE: Also returns True for integers,
+    so must use after checking is_int"""
+    try:
+        float(n)
+        return True
+    except ValueError:
+        return False
 
 
 if __name__ == '__main__':
