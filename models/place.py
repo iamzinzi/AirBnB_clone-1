@@ -2,7 +2,6 @@
 """This is the place class"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
-from sqlalchemy.ext.declarative import declarative_base
 
 class Place(BaseModel, Base):
     """This is the class for Place
