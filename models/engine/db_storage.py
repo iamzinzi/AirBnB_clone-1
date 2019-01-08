@@ -12,6 +12,7 @@ from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 from models.base_model import Base
 
+
 class DBStorage:
     """class Database Storage
     """
@@ -23,7 +24,7 @@ class DBStorage:
         """
         HBNB_MYSQL_USER = getenv("HBNB_MYSQL_USER")
         HBNB_MYSQL_PWD = getenv("HBNB_MYSQL_PWD")
-        HBNB_MYSQL_HOST = getenv("HBNB_MYSQL_HOST") # should be localhost
+        HBNB_MYSQL_HOST = getenv("HBNB_MYSQL_HOST")
         HBNB_MYSQL_DB = getenv("HBNB_MYSQL_DB")
         HBNB_ENV = getenv("HBNB_ENV")
 
@@ -52,7 +53,6 @@ class DBStorage:
                     key = "{}.{}".format(type(instance).__name__, instance.id)
                     found_objects[key] = instance
         return found_objects
-
 
     def new(self, obj):
         """Add the object to the current database session (self.__session)
