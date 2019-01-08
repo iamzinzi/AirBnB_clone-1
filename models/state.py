@@ -27,5 +27,4 @@ class State(BaseModel, Base):
                     city_instances.append(v)
         return city_instances
 
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        cities = relationship("City", cascade="all, delete", backref="state")
+    cities = relationship("City", cascade="all, delete", backref="state")
