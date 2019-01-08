@@ -48,12 +48,12 @@ class HBNBCommand(cmd.Cmd):
             for kv_pair in my_list[1:]:
                 k, v = kv_pair.split('=')
                 if is_int(v):
-                    obj.__dict__[k] = int(v)
+                    setattr(obj, k, int(v))
                 elif is_float(v):
-                    obj.__dict__[k] = float(v)
+                    setattr(obj, k, float(v))
                 else:
                     v = v.replace('_', ' ')
-                    obj.__dict__[k] = v.strip('"')
+                    setattr(obj, k, v.strip('"\''))
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
