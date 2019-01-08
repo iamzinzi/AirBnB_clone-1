@@ -19,6 +19,8 @@ class Place(BaseModel, Base):
         amenity_ids: list of Amenity ids
     """
     __tablename__ = 'places'
+    
+    
     city_id = Column(
             'city_id',
             String(60),
