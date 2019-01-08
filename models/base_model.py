@@ -15,8 +15,8 @@ class BaseModel:
     """
 
     id=Column('id', String(60), nullable=False, primary_key=True)
-    created_at=Column('created_at', nullable=False, default=datatime.utcnow())
-    updated_at=Column('updated_at', nullable=False, default=datatime.utcnow())
+    created_at=Column('created_at', nullable=False, default=datetime.utcnow())
+    updated_at=Column('updated_at', nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class

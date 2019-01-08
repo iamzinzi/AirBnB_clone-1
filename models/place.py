@@ -37,13 +37,13 @@ class Place(BaseModel, Base):
     number_bathrooms = Column(
             'number_bathrooms',
             Integer,
-            nullabe=False,
+            nullable=False,
             default=0
         )
     max_guest = Column(
             'max_guest',
             Integer,
-            nullabe=False,
+            nullable=False,
             default=0
         )
     price_by_night = Column(
