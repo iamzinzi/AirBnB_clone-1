@@ -28,13 +28,13 @@ class Place(BaseModel, Base):
             nullable=False
         )
     user_id = Column(
-            'user_id',
+            'users_id',
             String(60),
             ForeignKey('users.id'),
             nullable=False
         )
     name = Column('name', String(128), nullable=False)
-    description = Column('description', String(1024), nullable=True)
+    description = Column('description', String(1024), nullable=False)
     number_rooms = Column('number_rooms', Integer, nullable=False, default=0)
     number_bathrooms = Column(
             'number_bathrooms',
@@ -57,11 +57,11 @@ class Place(BaseModel, Base):
     latitude = Column(
             'latitude',
             Float,
-            nullable=True
+            nullable=False
         )
     longitude = Column(
             'longitude',
             Float,
-            nullable=True
+            nullable=False
         )
     amenity_ids = []
