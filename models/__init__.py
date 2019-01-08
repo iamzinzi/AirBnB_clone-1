@@ -12,7 +12,6 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
-print(os.environ)
 if getenv("HBNB_TYPE_STORAGE") == "db":
     storage = DBStorage()
 elif getenv("HBNB_TYPE_STORAGE") == "file":
