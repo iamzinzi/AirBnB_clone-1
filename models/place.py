@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 
+
 class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
@@ -19,6 +20,7 @@ class Place(BaseModel, Base):
         amenity_ids: list of Amenity ids
     """
     __tablename__ = 'places'
+
     city_id = Column(
             'city_id',
             String(60),
