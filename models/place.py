@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 
+
 class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
@@ -19,6 +20,7 @@ class Place(BaseModel, Base):
         amenity_ids: list of Amenity ids
     """
     __tablename__ = 'places'
+
     city_id = Column(
             'city_id',
             String(60),
@@ -26,13 +28,13 @@ class Place(BaseModel, Base):
             nullable=False
         )
     user_id = Column(
-            'users_id',
+            'user_id',
             String(60),
             ForeignKey('users.id'),
             nullable=False
         )
     name = Column('name', String(128), nullable=False)
-    description = Column('description', String(1024), nullable=False)
+    description = Column('description', String(1024), nullable=True)
     number_rooms = Column('number_rooms', Integer, nullable=False, default=0)
     number_bathrooms = Column(
             'number_bathrooms',
@@ -55,11 +57,11 @@ class Place(BaseModel, Base):
     latitude = Column(
             'latitude',
             Float,
-            nullable=False
+            nullable=True
         )
     longitude = Column(
             'longitude',
             Float,
-            nullable=False
+            nullable=True
         )
     amenity_ids = []
