@@ -9,11 +9,22 @@ from os import getenv
 place_amenity = Table(
         'place_amenity',
         Base.metadata,
-        Column('place_id', String(60),
-            ForeignKey('places.id'), primary_key=True, nullable=False),
-        Column('amenity_id', String(60),
-            ForeignKey('amenities.id'), primary_key=True, nullable=False)
+        Column(
+            'place_id',
+            String(60),
+            ForeignKey('places.id'),
+            primary_key=True,
+            nullable=False
+        ),
+        Column(
+            'amenity_id',
+            String(60),
+            ForeignKey('amenities.id'),
+            primary_key=True,
+            nullable=False
+        )
     )
+
 
 class Place(BaseModel, Base):
     """This is the class for Place
@@ -110,7 +121,6 @@ class Place(BaseModel, Base):
         if class_name["__class___"] == "Amenity":
             obj_id = class_name["id"]
             amenity_ids.append(obj_id)
-            
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship(
