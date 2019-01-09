@@ -34,7 +34,7 @@ class DBStorage:
 
         # Drop all tables if HBNB_ENV is equal to test
         if HBNB_ENV == "test":
-            Base.metadata.drop_all()
+            Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         """Query on the current database session all objects depending
