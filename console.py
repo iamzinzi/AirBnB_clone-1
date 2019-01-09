@@ -43,17 +43,19 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
 
-            obj = eval("{}()".format(my_list[0]))
+            obj_to_build = my_list[0]
             # update
+            kwargs_to_build = {}
             for kv_pair in my_list[1:]:
                 k, v = kv_pair.split('=')
                 if is_int(v):
-                    setattr(obj, k, int(v))
+                    kwargs_to_build[k] = int(v)
                 elif is_float(v):
-                    setattr(obj, k, float(v))
+                    kwargs_to_build[k] = float(v)
                 else:
                     v = v.replace('_', ' ')
-                    setattr(obj, k, v.strip('"\''))
+                    kwargs_to_build[k] = v.strip('"\'')
+            obj = eval("{}(**{})".format(my_list[0], kwargs_to_build))
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
