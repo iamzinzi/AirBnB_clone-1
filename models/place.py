@@ -1,10 +1,19 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 from os import getenv
 
+
+place_amenity = Table(
+        'place_amenity',
+        Base.metadata,
+        Column('place_id', String(60),
+            ForeignKey('places.id'), primary_key=True, nullable=False),
+        Column('amenity_id', String(60),
+            ForeignKey('amenities.id'), primary_key=True, nullable=False)
+    )
 
 class Place(BaseModel, Base):
     """This is the class for Place
@@ -81,9 +90,37 @@ class Place(BaseModel, Base):
                     review_instances.append(v)
         return review_instances
 
+    @property
+    def amenities(self):
+        """return list of Amenity instances with place_id equal to the current
+        Place.id"""
+        amenity_instances = []
+        for k, v in objects.items():
+            class_name, instance_id = k.split(".")
+            if class_name == "Amenity":
+                if v["place_id"] == self.id and instance_id in amenity_ids:
+                    amenity_instances.append(v)
+        return amenity_instances
+
+    @amenities.setter
+    def amenities(self, obj):
+        """append id of amenity objects into amenity_ids
+        """
+        class_dict = obj.__dict__
+        if class_name["__class___"] == "Amenity":
+            obj_id = class_name["id"]
+            amenity_ids.append(obj_id)
+            
+
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship(
                 'Review',
                 cascade='all, delete',
+                backref='place'
+            )
+        amenities = relationship(
+                'Amenity',
+                secondary=place_amenity,
+                viewonly=False,
                 backref='place'
             )
