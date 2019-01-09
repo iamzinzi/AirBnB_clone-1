@@ -42,8 +42,8 @@ Ex:
 `all` or `all State`
 
 #### Update
-`update <class name> <object id> <key> <"value">`
-Ex:
+`update <class name> <object id> <key> <"value">`  
+Ex:  
 `update User my_user_id name "Jinji"`
 
 #### Quit
