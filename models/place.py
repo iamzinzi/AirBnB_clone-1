@@ -111,7 +111,7 @@ class Place(BaseModel, Base):
             class_name, instance_id = k.split(".")
             if class_name == "Amenity":
                 if (v["place_id"] == self.id and
-                        instance_id in Amenity.amenity_ids):
+                        instance_id in self.amenity_ids):
                     amenity_instances.append(v)
         return amenity_instances
 
