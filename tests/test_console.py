@@ -59,6 +59,7 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.count.__doc__)
         self.assertIsNotNone(HBNBCommand.strip_clean.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_all.__doc__)
 
     def test_emptyline(self):
         """Test empty line input"""
