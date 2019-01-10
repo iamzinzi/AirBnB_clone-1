@@ -71,4 +71,3 @@ class TestDBStorage(unittest.TestCase):
         key = "{}.{}".format(user.__class__.__name__, str(user.id))
         self.storage.new(user)
         self.storage.save()
-     
