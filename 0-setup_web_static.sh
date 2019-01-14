@@ -20,5 +20,5 @@ chown -R ubuntu:ubuntu /data/
 # Update Nginx configuration to serve the content of /data/web_static/current/
 # to hbnb_static (ex: https://jinjis.space/hbnb_static)
 config_file=/etc/nginx/sites-available/default
-sed '29a \ \tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' $config_file
+sed -i '29a \ \tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' $config_file
 service nginx restart
