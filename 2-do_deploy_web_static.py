@@ -3,6 +3,8 @@ from fabric.api import local, put, run, env
 from datetime import datetime
 import os
 
+env.hosts = ['34.73.14.116', '34.73.100.50']
+
 
 def do_pack():
     """Generates a .tgz archive from the contents of the web_static folder
@@ -14,7 +16,6 @@ def do_pack():
     """
     try:
         if not os.path.exists("./versions"):
-            print("hi")
             local("mkdir versions")
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         file_name = "web_static_" + date + ".tgz"
@@ -29,10 +30,10 @@ def do_deploy(archive_path):
     """Distributes an archive to your web servers.
     Returns True if all operations have been done correctly; else, False.
     """
-    env.hosts = ['34.73.14.116', '34.73.100.50']
     try:
-        put('versions/web_static_20190115005446.tgz',
-            '/tmp/web_static_20190115005446.tgz')
+        if archive_path is None:
+            raise Exception
+        put(archive_path, '/tmp/web_static_20190115005446.tgz')
         run('mkdir -p /data/web_static/releases/web_static_20190115005446')
         run('tar -xzf /tmp/web_static_20190115005446.tgz -C '
             '/data/web_static/releases/web_static_20190115005446')
@@ -46,4 +47,4 @@ def do_deploy(archive_path):
             '/data/web_static/current')
         return True
     except:
-        return None
+        return False
