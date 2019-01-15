@@ -51,9 +51,10 @@ def do_deploy(archive_path):
         return False
 
     # Uncompress archive and clean up
-    command = f'tar -xzf /tmp/{new_path} -C /data/web_static/releases/{folder}'
+    command = 'tar -xzf /tmp/{} '.format(new_path)
+    command += '-C /data/web_static/releases/{}'.format(folder)
     run(command)
-    run(f'rm -rf /tmp/{new_path}')
+    run('rm -rf /tmp/{}'.format(new_path))
     command = 'mv /data/web_static/releases/{}/web_static/* '.format(folder)
     command += '/data/web_static/releases/{}/'.format(folder)
     run(command)
