@@ -3,6 +3,7 @@ from fabric.api import local, put, run, env
 from datetime import datetime
 import os
 
+env.user = 'ubuntu'
 env.hosts = ['34.73.14.116', '34.73.100.50']
 
 
@@ -33,8 +34,12 @@ def do_deploy(archive_path):
     try:
         if archive_path is None:
             raise Exception
-        put(archive_path, '/tmp/web_static_20190115005446.tgz')
-        run('mkdir -p /data/web_static/releases/web_static_20190115005446')
+        upload = put(archive_path, '/tmp/web_static_20190115005446.tgz')
+        if upload.failed:
+            raise Exception
+        x = run('mkdir -p /data/web_static/releases/web_static_20190115005446')
+        if x.failed:
+            return False
         run('tar -xzf /tmp/web_static_20190115005446.tgz -C '
             '/data/web_static/releases/web_static_20190115005446')
         run('rm -rf /tmp/web_static_20190115005446.tgz')
