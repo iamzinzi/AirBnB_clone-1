@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This is the state class"""
+import models
 from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import Column, Integer, String
@@ -19,11 +20,11 @@ class State(BaseModel, Base):
         """returns list of City instances with state_id equal to the current
         State.id"""
         city_instances = []
-        objects = storage.all()
+        objects = models.storage.all()
         for k, v in objects.items():
             class_name = k.split(".")[0]
             if class_name == "City":
-                if v["state_id"] == self.id:
+                if v.state_id == self.id:
                     city_instances.append(v)
         return city_instances
 
