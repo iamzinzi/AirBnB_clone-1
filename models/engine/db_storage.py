@@ -42,7 +42,7 @@ class DBStorage:
         """
         found_objects = {}
         if cls is not None:
-            for instance in self.__session.query(cls).all():
+            for instance in self.__session.query(eval(cls)).all():
                 key = "{}.{}".format(type(instance).__name__, instance.id)
                 found_objects[key] = instance
         else:
@@ -82,3 +82,9 @@ class DBStorage:
                                        expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+
+    def close(self):
+        """Dispose of current Session, if present.
+        """
+        self.__session.remove()
