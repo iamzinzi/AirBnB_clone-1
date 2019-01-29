@@ -6,6 +6,7 @@ from models import storage
 app = Flask(__name__)
 data = storage.all('State')
 
+
 @app.teardown_appcontext
 def remove_session(response_or_exc):
     """Removes the current SQLAlchemy Session
