@@ -4,7 +4,6 @@ from flask import Flask, render_template
 from models import storage
 
 app = Flask(__name__)
-data = storage.all('State')
 
 
 @app.teardown_appcontext
@@ -18,10 +17,10 @@ def remove_session(response_or_exc):
 def show_states():
     """Shows all State instances
     """
+    data = storage.all('State')
     states = []
     for k, v in data.items():
         states.append(v)
-    states = sorted(states, key=lambda x: x.name)
     return render_template('7-states_list.html', states=states)
 
 if __name__ == "__main__":
