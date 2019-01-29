@@ -21,6 +21,7 @@ def show_states():
     states = []
     for k, v in data.items():
         states.append(v)
+    states = sorted(states, key=lambda x: x.name)
     return render_template('7-states_list.html', states=states)
 
 if __name__ == "__main__":
