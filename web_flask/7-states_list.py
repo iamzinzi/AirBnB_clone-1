@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Starts a Flask web application"""
+"""Starts a Flask web application that renders HTML containing all States"""
 from flask import Flask, render_template
 from models import storage
 
